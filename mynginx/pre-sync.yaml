@@ -11,5 +11,5 @@ spec:
       containers:
       - name: main
         image: alpine:latest
-        command: ["date"]
+        command: ["sleep", "120"]
       restartPolicy: Never
