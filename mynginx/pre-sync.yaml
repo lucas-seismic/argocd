@@ -9,7 +9,7 @@ spec:
   template:
     spec:
       containers:
-      - image: main
-        name: alpine:latest
+      - name: main
+        image: alpine:latest
         command: ["date"]
       restartPolicy: Never
