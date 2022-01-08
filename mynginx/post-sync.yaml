@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: post-sync
+  namespace: mynginx
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+spec:
+  template:
+    spec:
+      containers:
+      - image: main
+        name: alpine:latest
+        command: ["date"]
+      restartPolicy: Never
