@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mynginx
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/lucas-seismic/argocd.git
+    targetRevision: HEAD
+    path: mynginx
+    kustomize:
+      version: v4.2.0
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mynginx
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 3m
+      limit: 5
+    syncOptions:
+    - ApplyOutOfSyncOnly=true
+    - PrunePropagationPolicy=background
+    - PruneLast=True
